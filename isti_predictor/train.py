@@ -43,11 +43,10 @@ def main():
 						help='Learning_Rate')
 	parser.add_argument('-ba','--batch_size',type=int,required=False, default=1,help='Batch_Size')
 	parser.add_argument('-seed',type=int,required=False, default=5,help='random seed')
-	parser.add_argument('-data',type=str,required=False, default='/media/hdd1/satish/mat_files/', \
+	parser.add_argument('-data',type=str,required=False, default='/mnt/hdd1/satish/Projects/BOSS_data/BOSS_thermalimage/data/mat_files', \
 						help='data path')
-	parser.add_argument('-label',type=str,required=False, default='../data/normalized_pep_labels/', \
-						help='label path')
-	parser.add_argument('-sync',type=str,required=False, default='/media/hdd1/satish/sync_data/', \
+	parser.add_argument('-label',type=str,required=False, default='/mnt/hdd1/satish/Projects/BOSS_data/BOSS_thermalimage/data/normalized_pep_labels',                       help='label path')
+	parser.add_argument('-sync',type=str,required=False, default='/mnt/hdd1/satish/Projects/BOSS_data/BOSS_thermalimage/data/sync_data', \
 						help='ecg&vid sync')
 	parser.add_argument('-phase',type=str,required=False, default='train',help='train/test mode')
 	parser.add_argument('-split','--train_val_split', type=float, required=False, default=0.8, \
@@ -113,7 +112,7 @@ def main():
 
 	#Optimizer
 	print("Initializing optimizer")
-	optimizer = optim.SGD([{"params": resnet_train, "lr": 0.01},
+	optimizer = optim.Adam([{"params": resnet_train, "lr": 0.01},
 							{"params": lstm_train}], lr=l_rate)
 
 	#Network to GPU
