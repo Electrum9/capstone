@@ -12,7 +12,8 @@ import math
 import matplotlib.pyplot as plt
 
 sys.path.append(".")
-from preprocess_face import preprocess_face, non_linearity
+# from preprocess_face import preprocess_face, non_linearity
+from utils.preprocess_face import preprocess_face, non_linearity
 
 
 class VideoLoader(preprocess_face, non_linearity):

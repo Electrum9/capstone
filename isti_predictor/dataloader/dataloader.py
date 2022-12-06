@@ -145,7 +145,8 @@ class thermaldataset(tdata.Dataset):
 			if(start_isti > label_data.shape[0]*0.75):
 				print("start_ecg> label shape : skipping this file")
 				return -1
-			label_data	  = label_data[start_ecg:(start_ecg + ir_video_data.shape[0])]	
+			# label_data	  = label_data[start_ecg:(start_ecg + ir_video_data.shape[0])]	
+			label_data	  = label_data[start_isti:(start_isti + ir_video_data.shape[0])]	
 		
 		#import pdb; pdb.set_trace()
 		#making length of label_data = len(vid)*128
