@@ -1,2 +1,3 @@
 *.pyc
-data/**
+data/*
+model_checkpoints*/*
