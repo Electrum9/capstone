@@ -39,7 +39,7 @@ def main():
         #Input arguments/training settings
         parser = argparse.ArgumentParser()
         parser.add_argument('-e','--epochs',type=int,required=False,default=50, help='Number_of_Epochs')
-        parser.add_argument('-lr','--learning_rate',type=float,required=False,default=0.01, \
+        parser.add_argument('-lr','--learning_rate',type=float,required=False,default=0.001, \
                                                 help='Learning_Rate')
         parser.add_argument('-ba','--batch_size',type=int,required=False, default=1,help='Batch_Size')
         parser.add_argument('-seed',type=int,required=False, default=5,help='random seed')
@@ -51,7 +51,7 @@ def main():
         parser.add_argument('-phase',type=str,required=False, default='train',help='train/test mode')
         parser.add_argument('-split','--train_val_split', type=float, required=False, default=0.8, \
                                                 help='train/test mode')
-        parser.add_argument('-min_batch', '--frames_in_GPU',type=int,required=False, default=45, \
+        parser.add_argument('-min_batch', '--frames_in_GPU',type=int,required=False, default=60, \
                                                 help='number of frames per batch from the video to go in GPU')
 
         #Parameters for existing model reload
@@ -112,8 +112,10 @@ def main():
 
         #Optimizer
         print("Initializing optimizer")
-        optimizer = optim.Adam([{"params": resnet_train, "lr": 0.01},
-                                                        {"params": lstm_train}], lr=l_rate)
+        # optimizer = optim.Adam([{"params": resnet_train, "lr": 0.01},
+        #                                                 {"params": lstm_train}], lr=l_rate)
+
+        optimizer = optim.SGD([{"params": resnet_train, "lr": 0.001}, {"params": lstm_train}], lr=l_rate)
 
         #Network to GPU
         model.cuda()
@@ -321,6 +323,7 @@ def training_loop(model, optimizer, scheduler, dataloader, loss, corr, **params)
                                         
                                         #output generation
                                         mini_out   = model(mini_input)
+                                        breakpoint()
                                         
                                         #loss computation
                                         loss_total = loss(mini_out, mini_label)

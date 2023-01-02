@@ -1,3 +1,4 @@
 *.pyc
 data/*
 model_checkpoints*/*
+isti_predictor/testdir/*
